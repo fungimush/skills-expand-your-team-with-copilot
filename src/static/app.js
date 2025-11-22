@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeLoginModal = document.querySelector(".close-login-modal");
   const loginMessage = document.getElementById("login-message");
 
+  // Chess button element
+  const chessButton = document.getElementById("chess-button");
+
   // Activity categories with corresponding colors
   const activityTypes = {
     sports: { label: "Sports", color: "#e8f5e9", textColor: "#2e7d32" },
@@ -40,6 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let searchQuery = "";
   let currentDay = "";
   let currentTimeRange = "";
+  let chessFilterActive = false;
+  let previousSearchQuery = "";
 
   // Authentication state
   let currentUser = null;
@@ -852,6 +857,29 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       showMessage("Failed to sign up. Please try again.", "error");
       console.error("Error signing up:", error);
+    }
+  });
+
+  // Chess button functionality
+  chessButton.addEventListener("click", () => {
+    chessFilterActive = !chessFilterActive;
+    
+    if (chessFilterActive) {
+      // Save current search query before activating chess filter
+      previousSearchQuery = searchQuery;
+      // Activate chess filter
+      chessButton.classList.add("active");
+      searchInput.value = "chess";
+      searchQuery = "chess";
+      displayFilteredActivities();
+      showMessage("Showing chess activities! ♟️", "success");
+    } else {
+      // Deactivate chess filter and restore previous search query
+      chessButton.classList.remove("active");
+      searchInput.value = previousSearchQuery;
+      searchQuery = previousSearchQuery;
+      displayFilteredActivities();
+      showMessage("Chess filter cleared", "info");
     }
   });
 

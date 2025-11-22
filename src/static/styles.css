@@ -617,6 +617,9 @@ footer {
   position: absolute;
   top: 10px;
   right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 #user-status {
@@ -652,6 +655,25 @@ footer {
 
 .user-icon {
   font-size: 1rem;
+}
+
+.chess-icon {
+  font-size: 1rem;
+}
+
+.chess-icon-button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chess-icon-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.chess-icon-button.active {
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 #logout-button {
