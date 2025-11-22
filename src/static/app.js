@@ -874,9 +874,8 @@ document.addEventListener("DOMContentLoaded", () => {
       displayFilteredActivities();
       showMessage("Showing chess activities! ♟️", "success");
     } else {
-      // Deactivate chess filter
+      // Deactivate chess filter and restore previous search query
       chessButton.classList.remove("active");
-      // Restore previous search query if it wasn't "chess"
       searchInput.value = previousSearchQuery;
       searchQuery = previousSearchQuery;
       displayFilteredActivities();
