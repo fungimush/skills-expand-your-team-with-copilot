@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let searchQuery = "";
   let currentDay = "";
   let currentTimeRange = "";
+  let chessFilterActive = false;
+  let previousSearchQuery = "";
 
   // Authentication state
   let currentUser = null;
@@ -859,12 +861,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Chess button functionality
-  let chessFilterActive = false;
-  
   chessButton.addEventListener("click", () => {
     chessFilterActive = !chessFilterActive;
     
     if (chessFilterActive) {
+      // Save current search query before activating chess filter
+      previousSearchQuery = searchQuery;
       // Activate chess filter
       chessButton.classList.add("active");
       searchInput.value = "chess";
@@ -874,8 +876,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       // Deactivate chess filter
       chessButton.classList.remove("active");
-      searchInput.value = "";
-      searchQuery = "";
+      // Restore previous search query if it wasn't "chess"
+      searchInput.value = previousSearchQuery;
+      searchQuery = previousSearchQuery;
       displayFilteredActivities();
       showMessage("Chess filter cleared", "info");
     }
